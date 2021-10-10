@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '1.2.0'
+}
+
+group 'com.amcjt'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version = '2020.2.3'
+    //localPath = '/Users/jintao/Library/Application Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/202.7660.26/IntelliJ IDEA.app'
+}
+
+/*
+patchPluginXml {
+    changeNotes """
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>"""
+}*/

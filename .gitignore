@@ -1,0 +1,12 @@
+.DS_Store
+*.iws
+*.ipr
+*.iml
+.idea/
+/build/
+/test-configs/
+.gradle/
+gradle-app.setting
+/.gradletasknamecache
+_support/
+/out/
