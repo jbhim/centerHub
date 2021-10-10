@@ -6,10 +6,14 @@ import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.util.ui.JBUI;
+import com.intellij.xdebugger.impl.ui.TextViewer;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author jintao
+ */
 public class CenterHubMainPanel extends JPanel {
     public static final String ID_TOOL_WINDOW = "CenterHub";
     private static final String MAIN_ACTION_GROUP = "CenterHubToolBar";
@@ -18,6 +22,8 @@ public class CenterHubMainPanel extends JPanel {
 
     public CenterHubMainPanel(final ToolWindow toolWindow, final Project project) {
         super(new BorderLayout());
+        // 设置Border 1px
+        this.setBorder(JBUI.Borders.empty(1));
 
         this.toolWindow = toolWindow;
         this.project = project;
@@ -30,10 +36,46 @@ public class CenterHubMainPanel extends JPanel {
         toolBarBox.add(mainToolbar.getComponent());
         // toolBarBox 放上面
         add(toolBarBox, BorderLayout.NORTH);
-        this.setBorder(JBUI.Borders.empty(1));
+
         // 创建内容主体
-        JTextPane comp = new JTextPane();
-        comp.setText("test11111111");
-        this.add(comp, BorderLayout.CENTER);
+        TextViewer textViewer = new TextViewer("init test11111111"
+                + "init test11111111\n"
+                + "init test11111111\r\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n"
+                + "init test11111111\n", this.project);
+        this.add(textViewer, BorderLayout.CENTER);
     }
 }
