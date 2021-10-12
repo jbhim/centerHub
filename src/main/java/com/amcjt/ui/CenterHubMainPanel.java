@@ -7,9 +7,15 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.util.ui.JBUI;
 import com.intellij.xdebugger.impl.ui.TextViewer;
+import org.apache.commons.io.IOUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FilterInputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author jintao
@@ -20,7 +26,7 @@ public class CenterHubMainPanel extends JPanel {
     private final Project project;
     private final ToolWindow toolWindow;
 
-    public CenterHubMainPanel(final ToolWindow toolWindow, final Project project) {
+    public CenterHubMainPanel(final ToolWindow toolWindow, final Project project) throws IOException {
         super(new BorderLayout());
         // 设置Border 1px
         this.setBorder(JBUI.Borders.empty(1));
@@ -37,45 +43,10 @@ public class CenterHubMainPanel extends JPanel {
         // toolBarBox 放上面
         add(toolBarBox, BorderLayout.NORTH);
 
+        File file = new File("/Users/jintao/Desktop/settings.xml");
+        String readString = IOUtils.toString(new FileInputStream(file), StandardCharsets.UTF_8);
         // 创建内容主体
-        TextViewer textViewer = new TextViewer("init test11111111"
-                + "init test11111111\n"
-                + "init test11111111\r\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n"
-                + "init test11111111\n", this.project);
+        TextViewer textViewer = new TextViewer(readString, this.project);
         this.add(textViewer, BorderLayout.CENTER);
     }
 }

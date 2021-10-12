@@ -17,6 +17,7 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.amcjt.service.CenterHubSetting"/>
         <toolWindow factoryClass="com.amcjt.view.CenterHubToolWindow" id="centerHub" icon="/images/readhubToolWindow.png"
                     anchor="bottom"/>
     </extensions>
