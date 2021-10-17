@@ -1,5 +1,8 @@
 package com.amcjt.ui;
 
+import com.amcjt.core.Chapter;
+import com.amcjt.core.TxtScanner;
+import com.amcjt.service.CenterHubSetting;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionToolbar;
@@ -7,15 +10,11 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.util.ui.JBUI;
 import com.intellij.xdebugger.impl.ui.TextViewer;
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FilterInputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 /**
  * @author jintao
@@ -26,7 +25,7 @@ public class CenterHubMainPanel extends JPanel {
     private final Project project;
     private final ToolWindow toolWindow;
 
-    public CenterHubMainPanel(final ToolWindow toolWindow, final Project project) throws IOException {
+    public CenterHubMainPanel(final ToolWindow toolWindow, final Project project) {
         super(new BorderLayout());
         // 设置Border 1px
         this.setBorder(JBUI.Borders.empty(1));
@@ -43,10 +42,16 @@ public class CenterHubMainPanel extends JPanel {
         // toolBarBox 放上面
         add(toolBarBox, BorderLayout.NORTH);
 
-        File file = new File("/Users/jintao/Desktop/settings.xml");
-        String readString = IOUtils.toString(new FileInputStream(file), StandardCharsets.UTF_8);
+        String content = "";
+        if (StringUtils.isNotBlank(CenterHubSetting.getInstance().getFilePath())) {
+            TxtScanner txtScanner = new TxtScanner(CenterHubSetting.getInstance().getFilePath());
+            txtScanner.analysis();
+            Chapter chapter = txtScanner.getChapter(0);
+            content = chapter.getContent();
+        }
+
         // 创建内容主体
-        TextViewer textViewer = new TextViewer(readString, this.project);
+        TextViewer textViewer = new TextViewer(content, this.project);
         this.add(textViewer, BorderLayout.CENTER);
     }
 }

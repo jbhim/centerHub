@@ -18,6 +18,8 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.amcjt.service.CenterHubSetting"/>
+        <applicationConfigurable instance="com.amcjt.config.CenterHubSettingConfigurable" dynamic="true"/>
+
         <toolWindow factoryClass="com.amcjt.view.CenterHubToolWindow" id="centerHub" icon="/images/readhubToolWindow.png"
                     anchor="bottom"/>
     </extensions>

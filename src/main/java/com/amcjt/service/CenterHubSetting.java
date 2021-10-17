@@ -12,10 +12,9 @@ import org.jetbrains.annotations.Nullable;
  */
 @State(name = "CenterHubSetting", storages = @Storage("center-bub-setting.xml"))
 public class CenterHubSetting implements PersistentStateComponent<CenterHubSetting> {
-    public String filePath;
+    public String filePath = "";
 
     public CenterHubSetting() {
-        this.filePath = "";
     }
 
     public static CenterHubSetting getInstance() {
@@ -31,4 +30,13 @@ public class CenterHubSetting implements PersistentStateComponent<CenterHubSetti
     public void loadState(@NotNull CenterHubSetting state) {
         this.filePath = state.filePath;
     }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
 }
