@@ -6,8 +6,10 @@ import com.amcjt.service.CenterHubSetting;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionToolbar;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
+import com.intellij.ui.EditorTextField;
 import com.intellij.util.ui.JBUI;
 import com.intellij.xdebugger.impl.ui.TextViewer;
 import org.apache.commons.lang3.StringUtils;
@@ -51,7 +53,7 @@ public class CenterHubMainPanel extends JPanel {
         }
 
         // 创建内容主体
-        TextViewer textViewer = new TextViewer(content, this.project);
-        this.add(textViewer, BorderLayout.CENTER);
+        EditorTextField editorTextField = new EditorTextField(content);
+        this.add(editorTextField, BorderLayout.CENTER);
     }
 }

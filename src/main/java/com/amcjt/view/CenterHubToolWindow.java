@@ -18,13 +18,9 @@ public class CenterHubToolWindow implements ToolWindowFactory {
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content;
-        try {
-            content = contentFactory.createContent(new CenterHubMainPanel(toolWindow, project),
-                    CenterHubMainPanel.ID_TOOL_WINDOW, false);
-            toolWindow.getContentManager().addContent(content);
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
+        content = contentFactory.createContent(new CenterHubMainPanel(toolWindow, project),
+                CenterHubMainPanel.ID_TOOL_WINDOW, false);
+        toolWindow.getContentManager().addContent(content);
 
     }
 }
