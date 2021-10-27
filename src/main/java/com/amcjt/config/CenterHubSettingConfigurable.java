@@ -5,6 +5,7 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.ui.TextBrowseFolderListener;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.util.ui.FormBuilder;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
@@ -18,19 +19,20 @@ import java.awt.event.ActionListener;
  * application 级别的properties Component
  */
 public class CenterHubSettingConfigurable implements Configurable {
-    private final JTextField textField;
+    private final TextFieldWithBrowseButton textFieldWithBrowseButton;
     private final JPanel mainPanel;
     private final CenterHubSetting centerHubSetting = CenterHubSetting.getInstance();
 
 
     public CenterHubSettingConfigurable() {
-        this.mainPanel = new JPanel();
-        this.textField = new JTextField(centerHubSetting.getFilePath());
-        TextFieldWithBrowseButton textFieldWithBrowseButton = new TextFieldWithBrowseButton(this.textField);
+        this.textFieldWithBrowseButton = new TextFieldWithBrowseButton(new JTextField(centerHubSetting.getFilePath()));
         textFieldWithBrowseButton.addBrowseFolderListener(new TextBrowseFolderListener(new FileChooserDescriptor(true, false, false, false, false, false)));
-        Box verticalBox = Box.createVerticalBox();
-        verticalBox.add(textFieldWithBrowseButton);
-        this.mainPanel.add(verticalBox);
+        FormBuilder formBuilder = FormBuilder
+                .createFormBuilder()
+                .addLabeledComponent("文件路径", textFieldWithBrowseButton, 1, false)
+                // 将剩余空间用空JPanel填充
+                .addComponentFillVertically(new JPanel(), 0);
+        this.mainPanel = formBuilder.getPanel();
     }
 
     @Nls(capitalization = Nls.Capitalization.Title)
@@ -47,16 +49,16 @@ public class CenterHubSettingConfigurable implements Configurable {
 
     @Override
     public boolean isModified() {
-        return !StringUtils.equals(textField.getText(), this.centerHubSetting.getFilePath());
+        return !StringUtils.equals(textFieldWithBrowseButton.getText(), this.centerHubSetting.getFilePath());
     }
 
     @Override
     public void apply() {
-        this.centerHubSetting.setFilePath(textField.getText());
+        this.centerHubSetting.setFilePath(textFieldWithBrowseButton.getText());
     }
 
     @Override
     public void reset() {
-        textField.setText(centerHubSetting.getFilePath());
+        textFieldWithBrowseButton.setText(centerHubSetting.getFilePath());
     }
 }
